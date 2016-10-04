@@ -1,4 +1,4 @@
-This is fork [py-radius](/btimby/py-radius) repository. Only change is rewrite
+This is fork [py-radius](http://github.com/btimby/py-radius) repository. Only change is rewrite
 for Python3 and PIP.
 
 
