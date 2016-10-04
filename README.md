@@ -1,3 +1,7 @@
+This is fork [py-radius](/btimby/py-radius) repository. Only change is rewrite
+for Python3 and PIP.
+
+
 RADIUS authentication module for Python 1.5.2+
 
 (c) 1999 Stuart Bishop <zen@shangri-la.dropbear.id.au>
@@ -92,30 +96,32 @@ retrying. Defaults to 5.
 Example
 -----
 
-    #!/bin/env python
+    #!/bin/env python3
     from getpass import getpass
     from radius import RADIUS
 
-    host = raw_input("Host? (default = 'radius')")
-    port = raw_input('Port? (default = 1645) ')
+    host = input("Host? (default = 'localhost') > ")
+    if not host:
+        host = 'localhost'
 
-    if not host: host = 'radius'
-
-    if port: port = int(port)
-    else: port = 1645
+    port = input('Port? (default = 1645) > ')
+    if port:
+        port = int(port)
+    else:
+        port = 1645
 
     secret = ''
-    uname,passwd = None,None
-    while not secret: secret = getpass('RADIUS Secret? ')
-    while not uname:  uname  = raw_input("Username? ")
-    while not passwd: passwd = getpass("Password? ")
+    while not secret:
+        secret = getpass('RADIUS Secret? ').encode('ascii')
 
-    r = RADIUS(secret,host,port)
-    r.timeout = 10
+    uname, passwd = None, None
+    while not uname:
+        uname = input("Username? > ").encode('ascii')
+    while not passwd:
+        passwd = getpass("Password? > ").encode('ascii')
 
-
-    if r.authenticate(uname,passwd):
-        print "Authentication Succeeded"
+    r = RADIUS(secret, host, port)
+    if r.authenticate(uname, passwd):
+        print("Authentication Succeeded")
     else:
-        print "Authentication Failed"
-
+        print("Authentication Failed")
