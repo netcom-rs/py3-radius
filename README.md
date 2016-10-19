@@ -22,6 +22,10 @@ modules library:
 This command will generally need to be run with an administrative
 level account (root under Unix, Administrator under NT etc.).
 
+### Via pip
+
+    pip3 install git+https://github.com/tlapicka/py3-radius.git
+
 RPM Package
 -----
 
